@@ -8,6 +8,7 @@ import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -86,8 +87,8 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
     private void initView(final List<AlarmRecord> mList) {
         swipeToLoadLayout = (SwipeToLoadLayout) findViewById(R.id.swipeToLoadLayout);
         recyclerView = (RecyclerView) findViewById(R.id.swipe_target);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-        //  RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 3);
+       // RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(getApplicationContext(), 2);
         // RecyclerView.LayoutManager layoutManager = new StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL);
 //        if (mType == TYPE_LINEAR) {
 //            layoutManager = new LinearLayoutManager(getContext());
@@ -147,6 +148,7 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
             @Override
             public void onClick(View v) {
                 mAdapter_AlarmRecord.addDate(0, new AlarmRecord("0", "BeiJing"));
+                recyclerView.smoothScrollToPosition(0);
             }
         });
     }
@@ -232,10 +234,12 @@ public class MainActivity extends AppCompatActivity implements OnRefreshListener
         // Toast.makeText(getContext(), "Done", Toast.LENGTH_SHORT).show();
         AlarmRecord tmp = new AlarmRecord();
         tmp.setPotNo("8888");
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");//设置日期格式
         tmp.setDDate(df.format(new Date()));// new Date()为获取当前系统时间
         mAdapter_AlarmRecord.addDate(mAdapter_AlarmRecord.getItemCount(), tmp);
+        recyclerView.smoothScrollToPosition(mAdapter_AlarmRecord.getItemCount()-1);
         swipeToLoadLayout.setLoadingMore(false);
+
     }
 
     @Override

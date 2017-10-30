@@ -64,7 +64,7 @@ public class AlarmRecordAdapter extends RecyclerView.Adapter<AlarmRecordAdapter.
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        MyViewHolder holder = new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home, parent, false));
+        MyViewHolder holder = new MyViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_home_cardview, parent, false));
         return holder;
     }
 
